@@ -4,16 +4,16 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <math.h>
+    #include "fact.h"
     int yylex();
     void yyerror(const char* s);
     
 %}
 
 %define parse.error verbose // To make bison report errors more clearly
-%require "3.2"
-%language "c++"
 
-%union {
+
+%union {  
     double num;
 }
 %token<num> NUMBER
@@ -22,7 +22,7 @@
 %token<num> MUL DIV ADD SUB EQUALS
 
 // UNARY OPERATORS
-%token<num> ABS OP CP SQRT POW LOG
+%token<num> ABS OP CP SQRT CBRT LOG POW SIN COS TAN FACT NTHROOT
 %token<num> EOL
 
 // CONSTANTS
@@ -49,7 +49,7 @@
 %left ADD;
 %left MUL;
 %left DIV;
-%left SQRT LOG POW;
+%left SQRT CBRT LOG POW SIN COS TAN FACT NTHROOT;
 %left OP CP;
 
 %%
@@ -75,8 +75,14 @@ expr:   SUB expr  {$$=-$2;};
  
 functions : ABS expr ABS { if ($2 >=0) $$=$2; else $$=-$2;}
     | SQRT OP expr CP { $$ = sqrt($3); }
+    | CBRT OP expr CP { $$ = cbrt($3); }
+    | NTHROOT OP expr COLON expr CP { $$ = pow($5,1/$3); }
     | POW OP expr COLON expr CP { $$ = pow($3,$5); } 
     | LOG OP expr COLON expr CP { if($3==1) { yyerror("The base of the logarithms must not be 1 and must be larger than 0"); exit(1); } else $$ = log10($5)/log10($3); }
+    | SIN OP expr CP  { $$ = sin($3); }
+    | COS OP expr CP  { $$ = cos($3); }
+    | TAN OP expr CP  { $$ = tan($3); }
+    | expr FACT       { $$ = factorial($2);}
 ;
 
 constants: PI { $$ = 3.14; }

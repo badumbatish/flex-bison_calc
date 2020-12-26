@@ -1,7 +1,6 @@
-
-ALL : 
-
-fb1-5:  fb1-5.l fb1-5.y
-		bison -d fb1-5.y
-		flex fb1-5.l
-		gcc -o $@ fb1-5.tab.c lex.yy.c -lfl -lm
+snazzle: 
+	bison -d snazzle.y
+	g++ -c snazzle.tab.c -o snazzle.o
+	flex snazzle.l
+	g++ -c lex.yy.c -o lex.yy.o
+	g++ lex.yy.o snazzle.o  -o snazzle

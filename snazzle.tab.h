@@ -34,8 +34,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_YY_FB1_5_TAB_H_INCLUDED
-# define YY_YY_FB1_5_TAB_H_INCLUDED
+#ifndef YY_YY_SNAZZLE_TAB_H_INCLUDED
+# define YY_YY_SNAZZLE_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -49,22 +49,9 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUMBER = 258,
-    COLON = 259,
-    MUL = 260,
-    DIV = 261,
-    ADD = 262,
-    SUB = 263,
-    EQUALS = 264,
-    ABS = 265,
-    OP = 266,
-    CP = 267,
-    SQRT = 268,
-    POW = 269,
-    LOG = 270,
-    EOL = 271,
-    PI = 272,
-    E = 273
+    INT = 258,
+    FLOAT = 259,
+    STRING = 260
   };
 #endif
 
@@ -72,11 +59,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "fb1-5.y"
+#line 22 "snazzle.y"
 
-    double num;
+  int ival;
+  float fval;
+  char *sval;
 
-#line 80 "fb1-5.tab.h"
+#line 69 "snazzle.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -89,4 +78,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_FB1_5_TAB_H_INCLUDED  */
+#endif /* !YY_YY_SNAZZLE_TAB_H_INCLUDED  */

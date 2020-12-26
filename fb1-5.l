@@ -3,6 +3,7 @@
     #include <stdlib.h>
     #include "fb1-5.tab.h"
 %}
+%option noyywrap
 %%
 "+"+    { return ADD; }
 "--"+  { return ADD; }
@@ -21,6 +22,7 @@
 
 ("pi")|("PI") { return PI;}
 "e"  { return E;}
+
 
 ("sin")|("SIN") { return SIN; }
 ("cos")|("COS") { return COS; }

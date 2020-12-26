@@ -60,16 +60,17 @@ extern int yydebug;
     OP = 266,
     CP = 267,
     SQRT = 268,
-    LOG = 269,
-    POW = 270,
-    SIN = 271,
-    COS = 272,
-    TAN = 273,
-    FACT = 274,
-    NTHROOT = 275,
-    EOL = 276,
-    PI = 277,
-    E = 278
+    CBRT = 269,
+    LOG = 270,
+    POW = 271,
+    SIN = 272,
+    COS = 273,
+    TAN = 274,
+    FACT = 275,
+    NTHROOT = 276,
+    EOL = 277,
+    PI = 278,
+    E = 279
   };
 #endif
 
@@ -77,11 +78,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "fb1-5.y"
+#line 19 "fb1-5.y"
   
     double num;
 
-#line 85 "fb1-5.tab.h"
+#line 86 "fb1-5.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

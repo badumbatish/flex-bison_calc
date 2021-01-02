@@ -34,8 +34,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_YY_FB1_5_TAB_H_INCLUDED
-# define YY_YY_FB1_5_TAB_H_INCLUDED
+#ifndef YY_YY_CALC_TAB_H_INCLUDED
+# define YY_YY_CALC_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -49,28 +49,16 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUMBER = 258,
-    COLON = 259,
-    MUL = 260,
-    DIV = 261,
-    ADD = 262,
-    SUB = 263,
-    EQUALS = 264,
-    ABS = 265,
-    OP = 266,
-    CP = 267,
-    SQRT = 268,
-    CBRT = 269,
-    LOG = 270,
-    POW = 271,
-    SIN = 272,
-    COS = 273,
-    TAN = 274,
-    FACT = 275,
-    NTHROOT = 276,
-    EOL = 277,
-    PI = 278,
-    E = 279
+    T_INT = 258,
+    T_FLOAT = 259,
+    T_PLUS = 260,
+    T_MINUS = 261,
+    T_MULTIPLY = 262,
+    T_DIVIDE = 263,
+    T_LEFT = 264,
+    T_RIGHT = 265,
+    T_NEWLINE = 266,
+    T_QUIT = 267
   };
 #endif
 
@@ -78,11 +66,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 24 "fb1-5.y"
-  
-    double num;
+#line 13 "calc.y"
 
-#line 86 "fb1-5.tab.h"
+	int ival;
+	float fval;
+
+#line 75 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -95,4 +84,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_FB1_5_TAB_H_INCLUDED  */
+#endif /* !YY_YY_CALC_TAB_H_INCLUDED  */

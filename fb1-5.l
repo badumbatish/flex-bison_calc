@@ -3,7 +3,9 @@
     #include <stdlib.h>
     #include "fb1-5.tab.h"
 %}
-%option noyywrap
+
+
+
 %%
 "+"+    { return ADD; }
 "--"+  { return ADD; }
@@ -17,8 +19,8 @@
 "="    { return EQUALS;}
 
 [0-9]+(\.[0-9]+)? { yylval.num = atof(yytext); return NUMBER; }
-\n     { return EOL; }
-[\t]  { /* ignore whitespace */ }
+"\n"     { return EOL; }
+[\t\f\v\n]  { /* ignore whitespace */ }
 
 ("pi")|("PI") { return PI;}
 "e"  { return E;}
@@ -35,7 +37,11 @@
 ("cbrt")|("CBRT") { return CBRT; }
 ("nthroot")|("NTHROOT") { return NTHROOT; }
 
-.      { printf("Mystery character %c\n", *yytext); }
+.      {  }
 
 
 %%
+
+int yywrap() {
+  return 1;
+}

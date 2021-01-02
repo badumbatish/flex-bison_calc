@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
     }
 
     p = fork();
-    setvbuf(stdout, NULL, _IONBF, 0);
 
     if(p < 0 ) {
         fprintf(stderr,"Forking failed");
@@ -64,8 +63,9 @@ int main(int argc, char *argv[]) {
         close(pip1[1]);
         //close(pip2[1]); 
         close(pip2[0]);
-        execvp("unbuffer -p ./b",argv);
-        std::cout << "Program exits prematurely" << std::endl;
+        char* const ar[4] = {"unbuffer","-p","./b",NULL}; // constant pointer to a char array
+        if(execvp("unbuffer",ar) < 0) { std::cout << "Program exits prematurely" << std::endl; return -1;};
+        
     } 
     return 0;
 }

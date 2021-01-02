@@ -1764,10 +1764,8 @@ yyreturn:
 #line 99 "fb1-5.y"
 
 int main(int argc, char *argv[]) {
-	yyin = stdin;
-	do {
-		yyparse();
-	} while(!feof(yyin));    return 0;
+	yyparse();
+    return 0;
 }
 void yyerror (char const *s)
 {

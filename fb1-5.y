@@ -98,8 +98,10 @@ constants: PI { $$ = 3.14; }
 ;
 %%
 int main(int argc, char *argv[]) {
-    yyparse();
-    return 0;
+	yyin = stdin;
+	do {
+		yyparse();
+	} while(!feof(yyin));    return 0;
 }
 void yyerror (char const *s)
 {

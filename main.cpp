@@ -64,8 +64,8 @@ int main(int argc, char *argv[]) {
         close(pip1[1]);
         //close(pip2[1]); 
         close(pip2[0]);
-        execvp("./c",argv);
-        
+        execvp("unbuffer -p ./b",argv);
+        std::cout << "Program exits prematurely" << std::endl;
     } 
     return 0;
 }

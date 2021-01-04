@@ -1,0 +1,6 @@
+*.tab.*
+*.yy.*
+*.d
+*.o
+*.out
+valg_log

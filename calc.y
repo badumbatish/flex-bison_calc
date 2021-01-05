@@ -5,7 +5,6 @@
     #include <cmath>
     #include <unistd.h>
     #include <cstring>
-    #include <iostream>
     #include "fact.h"
     extern FILE* yyin;
 
@@ -39,7 +38,6 @@
 %token<num> PI E
 
 
-%type<num> program_input
 %type<num> pline
 %type<num> expr
 %type<num> functions 
@@ -63,11 +61,7 @@
 %left OP CP;
 
 %%
-program_input: %empty {}
-    | program_input pline
-;
-pline: EOL
-    | expr { printf("%.2f\n",$1); YYACCEPT; }
+pline: expr { printf("%.2f\n",$1); YYACCEPT; }
 ;
 
 
@@ -84,24 +78,30 @@ expr:   SUB expr  {$$=-$2;};
 ;
  
 functions : ABS expr ABS { if ($2 >=0) $$=$2; else $$=-$2;}
-    | SQRT OP expr CP { $$ = sqrt($3); }
-    | CBRT OP expr CP { $$ = cbrt($3); }
+    | SQRT expr { $$ = sqrt($2); }
+    | CBRT expr { $$ = cbrt($2); }
     | NTHROOT OP expr COLON expr CP { $$ = pow($5,1/$3); }
     | POW OP expr COLON expr CP { $$ = pow($3,$5); } 
     | LOG OP expr COLON expr CP { if($3==1) { yyerror("The base of the logarithms must not be 1 and must be larger than 0");} else $$ = log10($5)/log10($3); }
-    | SIN OP expr CP  { $$ = sin($3); }
-    | COS OP expr CP  { $$ = cos($3); }
-    | TAN OP expr CP  { $$ = tan($3); }
-    | expr FACT       { $$ = factorial($2);}
+    | SIN expr  { $$ = sin($2); }
+    | COS expr  { $$ = cos($2); }
+    | TAN expr  { $$ = tan($2); }
+    | expr FACT { $$ = factorial($2);}
 ;
 
 constants: PI { $$ = 3.14; }
-    | E { $$ = 2,71828;}
+    | E { $$ = 2.71828;}
 ;
 %%
 
 int main(int argc, char *argv[]) {
-    calc(argv[1]);
+    if(argc>1) {
+        for(size_t i=1;i<argc;i++) {
+            calc(argv[i]);
+        }
+        return 0;
+    }
+    else yyparse();
     return 0;
 }
 

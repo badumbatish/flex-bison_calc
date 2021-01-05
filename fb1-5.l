@@ -20,7 +20,7 @@
 
 [0-9]+(\.[0-9]+)? { yylval.num = atof(yytext); return NUMBER; }
 "\n"     { return EOL; }
-[\t\f\v\n]  { /* ignore whitespace */ }
+[\t]  { /* ignore whitespace */ }
 
 ("pi")|("PI") { return PI;}
 "e"  { return E;}

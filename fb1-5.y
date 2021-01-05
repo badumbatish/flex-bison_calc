@@ -9,14 +9,16 @@
     #include "fact.h"
     extern FILE* yyin;
 
-    typedef struct yy_buffer_state * YY_BUFFER_STATE;
     extern int yyparse();
-    int yylex();
+    extern int yylex();
+    void yyerror(const char* s);
 
+    typedef struct yy_buffer_state * YY_BUFFER_STATE;
     extern YY_BUFFER_STATE yy_scan_string(const char* str);
     extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-    void yyerror(const char* s);
+
+    int calc(char * const str);
 %}
 
 %define parse.error verbose // To make bison report errors more clearly
@@ -65,7 +67,7 @@ program_input: %empty {}
     | program_input pline
 ;
 pline: EOL
-    | expr EOL { printf("%.2f\n",$1);}
+    | expr { printf("%.2f\n",$1); YYACCEPT; }
 ;
 
 
@@ -97,12 +99,25 @@ constants: PI { $$ = 3.14; }
     | E { $$ = 2,71828;}
 ;
 %%
+
 int main(int argc, char *argv[]) {
-	yyparse();
+    calc(argv[1]);
     return 0;
 }
+
+int calc(char str[]) {
+    YY_BUFFER_STATE buffer = yy_scan_string(str);
+    yyparse();
+    yy_delete_buffer(buffer);
+    return 0;
+}
+
+
+
 void yyerror (char const *s)
 {
   fprintf (stderr, "%s\n", s);
 }
+
+
 

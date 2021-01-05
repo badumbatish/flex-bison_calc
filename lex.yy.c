@@ -375,7 +375,7 @@ static const flex_int16_t yy_accept[75] =
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
-        2,    2,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    4,    1,    1,    1,    1,    1,    1,    5,
         6,    7,    8,    9,   10,   11,   12,   13,   13,   13,
@@ -832,7 +832,6 @@ YY_RULE_SETUP
 { return EOL; }
 	YY_BREAK
 case 12:
-/* rule 12 can match eol */
 YY_RULE_SETUP
 #line 23 "fb1-5.l"
 { /* ignore whitespace */ }
@@ -907,7 +906,7 @@ YY_RULE_SETUP
 #line 43 "fb1-5.l"
 ECHO;
 	YY_BREAK
-#line 911 "lex.yy.c"
+#line 910 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

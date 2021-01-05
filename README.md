@@ -33,13 +33,13 @@ int main(int argc, char *argv[]) {
 ```
 bison -v -d calc.y
 flex  calc.l
-g++ -o $@.o calc.tab.c lex.yy.c -ll -lfl
+g++ -o calc calc.tab.c lex.yy.c -ll -lfl
 ```
 ### As a library
 ```
 bison -v -d calc.y
 flex  calc.l
-g++ -shared -fpic -o $@.so calc.tab.c lex.yy.c -ll -lfl
+g++ -shared -fpic -o libcalc.so calc.tab.c lex.yy.c -ll -lfl
 ```
 
 ### Use it with your program
